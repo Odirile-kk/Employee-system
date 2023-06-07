@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.btn{
+  margin: 2px;;
+}
+.addBtn{
+  display: flex;
+  justify-content: right;
+  margin-right: 20%;
+}
