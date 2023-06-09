@@ -3,11 +3,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Create = ({handleImageUpload}) => {
+const Create = ({dataParse}) => {
 
+    const {selectedImage, setSelectedImage, handleImageUpload} = dataParse
 
+    
     const [inputData, setInputData] = useState({
-        image: '',
+        image: selectedImage,
         name: '',
         surname: '',
         email: '',
@@ -16,8 +18,6 @@ const Create = ({handleImageUpload}) => {
         phone: '',
     })
 
-
-    
     const nav = useNavigate();
 
     const handleSubmit = (event) => {
@@ -25,11 +25,10 @@ const Create = ({handleImageUpload}) => {
         event.preventDefault();
         axios.post('http://localhost:3001/employee/', inputData)
             .then(res => {
-                alert('succes')
+                alert('success')
                 nav('/')
             })
     }
-
 
     return (
         <div >
@@ -74,12 +73,8 @@ const Create = ({handleImageUpload}) => {
 
                     <div>
                         <label class="form-label" >Select Image</label>
-                        <input type="file" name="file" id="blah"
-
-                            onChange= {handleImageUpload}
-                        
+                        <input type="file" name="file" id="img" onChange= {handleImageUpload}
                         />
-
                     </div>
 
                     <button class="btn btn-success" >Submit</button>
