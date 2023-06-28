@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Create = ({dataParse}) => {
 
-    const {selectedImage, setSelectedImage, handleImageUpload} = dataParse
+    const {selectedImage, handleImageUpload} = {dataParse};
 
     
     const [inputData, setInputData] = useState({

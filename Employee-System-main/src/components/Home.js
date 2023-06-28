@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Home = ({ dataParse }) => {
   const [data, setData] = useState([]);
-  const {selectedImage, setSelectedImage, handleImageUpload} = dataParse
+  // const {selectedImage, setSelectedImage, handleImageUpload} = dataParse
 
   useEffect(() => {
     axios.get('http://localhost:3001/employee')
