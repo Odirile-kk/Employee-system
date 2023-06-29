@@ -6,7 +6,6 @@ userName: {type: String, required: true},
 //unique will ensure theres no duplicate email
 email: {type: String, required: true, unique: true},
 pasword: {type: String, required: true},
-qoute: {type: String},
 
 },
 {collection: 'emp-data'}

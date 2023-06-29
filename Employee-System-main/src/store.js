@@ -4,7 +4,7 @@ import employeeReducer from './components/employeeSlice';
 
 const store = configureStore({
     reducer: {
-      employee: employeeReducer,
+        employees : employeeReducer,
        user: userReducer,
     },
   });

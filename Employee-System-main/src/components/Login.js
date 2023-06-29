@@ -12,19 +12,30 @@ const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-    const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  async function handleSubmit(event) {
+    event.preventDefault();
+  
     try {
-      const details = {email, password}
-       await axios.post('http://localhost:3002/api/login', details);
-       alert("Login Successful");
-       nav('/home')
-    }
-    catch (error) {
-      console.log(error)
+      const response = await axios.post('http://localhost:3002/api/login', {
+        email,
+        password,
+      });
+  
+      const data = response.data;
+  
+      if (data.user) {
+        localStorage.setItem('token', data.user);
+        alert('Login successful');
+        window.location.href = '/home';
+      } else {
+        alert('Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
     }
   }
+    
+   
 
   return (
     <div>

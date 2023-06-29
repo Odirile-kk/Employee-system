@@ -23,7 +23,7 @@ const Update = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-         axios.put(`http://localhost:3001/employee/`+id, inputData)
+         axios.patch(`http://localhost:3001/api/employees/`+id, inputData)
         .then(res => {
             alert('succes')
             nav('/')

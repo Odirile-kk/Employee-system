@@ -10,29 +10,48 @@ import { setEmail, setPassword, setValidate } from './userSlice';
 const Register = () => {
 
   const nav = useNavigate();
-
+  const [userName, setUserName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-    const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  async function handleSubmit(event) {
+    event.preventDefault();
+  
     try {
-      const details = {email, password}
-       await axios.post('http://localhost:3002/api/register', details);
-       alert("Registration Successful");
-       nav('/login')
-    }
-    catch (error) {
+      const response = await axios.post('http://localhost:3002/api/register', {
+        userName,
+        email,
+        password,
+      });
+  
+      const data = response.data;
+  
+      if (data.status === 'Ok') {
+        alert('Registration successful')
+        nav('/login');
+      }
+      else  {
+        alert('User exists')
+      }
+    } catch (error) {
       console.log(error)
     }
   }
+    
+  
 
   return (
     <div>
         <div className="user-container">
     <form className="form">
       <h2>Sign Up</h2>
+      <input
+					value={userName}
+					onChange={(e) => setUserName(e.target.value)}
+					type="name"
+					placeholder="Name"
+				/>
+    
       <input
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}

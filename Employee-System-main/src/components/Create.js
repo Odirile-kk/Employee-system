@@ -23,8 +23,10 @@ const Create = ({dataParse}) => {
     const handleSubmit = (event) => {
 
         event.preventDefault();
-        axios.post('http://localhost:3001/employee/', inputData)
+        //post the input data to the server
+        axios.post('http://localhost:3001/api/employees', inputData)
             .then(res => {
+                console.log(res)
                 alert('success')
                 nav('/')
             })
