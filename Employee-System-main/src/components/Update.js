@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 // import Link from 'react-router-dom';
 
 
 const Update = () => {
-    const {id} = useParams();
+    const {id} = useParams()
 
     const [inputData, setInputData] = useState({
         id: id,
@@ -23,7 +24,8 @@ const Update = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-         axios.patch(`http://localhost:3001/api/employees/`+id, inputData)
+         axios.patch(`http://localhost:3001/api/employees/`+ inputData.id, inputData)
+         console.log(inputData.id)
         .then(res => {
             alert('succes')
             nav('/')
@@ -33,7 +35,7 @@ const Update = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/employee/` + id)
+        axios.get(`http://localhost:3001/api/employee/` + inputData.id)
         .then(res=> setInputData(res.data))
         .catch(err => console.log(err))
     }, [])

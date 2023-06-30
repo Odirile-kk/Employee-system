@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const EmpList = new mongoose.Schema({
-
+id: {type: String, required: true, unique: true},
+image: {type: String},
 name: {type: String, required: true},
 surname: {type: String},
 email: {type: String},

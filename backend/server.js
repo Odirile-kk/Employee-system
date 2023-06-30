@@ -15,7 +15,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/employeeData')
 
 
 app.get('/api/employees', (req, res) => {
-console.log(res)
   EmpList.find({})
   .then((employees) => {res.send(employees)})
   .catch((err) => res.status(500).send(err))
@@ -23,7 +22,7 @@ console.log(res)
 
 app.get('/api/employees/:id', (req, res) => {
   const employeeId = req.params.id;
-  EmpList.findById(employeeId)
+  EmpList.find({id: employeeId})
   .then((employees) => {res.send(employees)})
   .catch((err) => res.status(500).send(err))
 });
@@ -33,6 +32,8 @@ app.post('/api/employees', async (req, res) => {
   console.log('in post method', req.body)
   try {
     const newEmployees = await EmpList.create({
+    id: req.body.id,
+    image: req.body.image,
     name: req.body.name,
     surname: req.body.surname,
     email: req.body.email,
@@ -49,7 +50,7 @@ catch(err) {
 
 
 
-app.patch('/api/employees/:id', (req, res) => {
+app.put('/api/employees/:id', (req, res) => {
   const employeeId = req.params.id;
   const updatedEmployee = req.body;
   
@@ -63,9 +64,9 @@ app.patch('/api/employees/:id', (req, res) => {
 });
 
 app.delete('/api/employees/:id', async (req, res) => {
- 
+  const employeeId = req.params.id;
   try {
-    const employee = await EmpList.findByIdAndDelete(req.params.id);
+    const employee = await EmpList.findOneAndDelete({id: employeeId});
     if (employee) {
       res.json({ message: 'Employee deleted' });
     } else {

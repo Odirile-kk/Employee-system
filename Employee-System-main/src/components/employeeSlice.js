@@ -18,9 +18,9 @@ const employeeSlice = createSlice ({
             console.log(action)
             state.push(action.payload);
           })
-          .addCase(deleteEmployees.fulfilled, (state, action) => {
-            return state.employees.filter((employee) => employee.id !== action.payload);
-          })
+          // .addCase(deleteEmployees.fulfilled, (state, action) => {
+          //   return state.employees.filter((employee) => employee.id !== action.payload);
+          // })
           .addCase(updateEmployees.fulfilled, (state, action) => {
             const updatedemployees = action.payload;
             const index = state.findIndex((employees) => employees.id === updatedemployees.id);

@@ -2,13 +2,14 @@ import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const Create = ({dataParse}) => {
 
     const {selectedImage, handleImageUpload} = {dataParse};
-
     
     const [inputData, setInputData] = useState({
+        id: uuidv4(),
         image: selectedImage,
         name: '',
         surname: '',
@@ -21,8 +22,9 @@ const Create = ({dataParse}) => {
     const nav = useNavigate();
 
     const handleSubmit = (event) => {
-
         event.preventDefault();
+
+        
         //post the input data to the server
         axios.post('http://localhost:3001/api/employees', inputData)
             .then(res => {
