@@ -2,15 +2,12 @@ import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
-const Create = ({dataParse}) => {
 
-    const {selectedImage, handleImageUpload} = {dataParse};
-    
+const Create = () => {
+
     const [inputData, setInputData] = useState({
-        id: uuidv4(),
-        image: selectedImage,
+        image: '',
         name: '',
         surname: '',
         email: '',
@@ -21,10 +18,28 @@ const Create = ({dataParse}) => {
 
     const nav = useNavigate();
 
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+      
+          reader.onload = () => {
+            const image = reader.result;
+            setInputData((inputVal) => ({
+              ...inputVal,
+              image: image,
+            }));
+          };
+      
+          reader.readAsDataURL(file);
+        }
+      };
+      
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        
+
         //post the input data to the server
         axios.post('http://localhost:3001/api/employees', inputData)
             .then(res => {
@@ -74,12 +89,13 @@ const Create = ({dataParse}) => {
                         <input type='text' name='name' className='form-control'
                             onChange={e => setInputData({ ...inputData, phone: e.target.value })} />
                     </div>
-
+                    
                     <div>
                         <label class="form-label" >Select Image</label>
-                        <input type="file" name="file" id="img" onChange= {handleImageUpload}
+                        <input type="file" accept="image/*" id="image" onChange={handleImageUpload}
                         />
                     </div>
+                    
 
                     <button class="btn btn-success" >Submit</button>
                 </form>

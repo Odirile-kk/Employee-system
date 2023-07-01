@@ -2,44 +2,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { deleteEmployees, updateEmployees } from './employeeSlice';
-import {useDispatch} from 'react-redux'
-import { v4 as uuidv4 } from 'uuid';
+import { deleteEmployees, fetchEmployees } from './api';
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
-  const {id} = useParams();
-  const nav = useNavigate();
-  const [toggle, setToggle] = useState(true)
-
-  const [inputData, setInputData] = useState({
-    id: uuidv4(),
-    name: '',
-    surname: '',
-    email: '',
-    bio: ' ',
-    role: '',
-    phone: '',
-})
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/employees')
-      .then(res => setData(res.data))
-      .catch(err => console.log(err))
+    fetchAll()
   }, [])
 
-  function handleDelete(employeeId) {
-    if (window.confirm('Are you sure you want to delete this employee?')) {
-      dispatch(deleteEmployees(employeeId));
-      window.location.reload()
-    }
+  const fetchAll = async () => {
+    let response = await fetchEmployees();
+    setData(response.data);
+  }
+
+  const handleDelete = async (id) => {
+    await deleteEmployees(id);
+    fetchAll()
   }
 
   return (
-  <>
-    <div className='parent' style={toggle ? {display: 'block'} : {display: 'none'}}>
+  
+    <div className='parent' >
       <div className='container mt-5'>
         <div className="addBtn">
           <Link to="/create" className="btn btn-success"><i class="bi bi-person-plus"></i></Link>
@@ -81,9 +65,8 @@ const Home = () => {
                 <td>{item.role}</td>
                 <td>{item.phone}</td>
                 <td>
-                <Link to={`/update/${item.id}`} class="btn btn-success"><i class="bi bi-pen"></i></Link>
-                {/* <button onClick={() => update(item)} class="btn btn-success"><i class="bi bi-trash3"></i></button> */}
-                  <button onClick={e => handleDelete(item.id)} class="btn btn-danger"><i class="bi bi-trash3"></i></button>
+                <Link to={`/update/${item._id}`} class="btn btn-success"><i class="bi bi-pen"></i></Link>
+                  <button onClick={e => handleDelete(item._id)} class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                 </td>
               </tr>
             ))}
@@ -92,8 +75,6 @@ const Home = () => {
       </div>
       </div>
 
-</>
-          
   )
 }
 

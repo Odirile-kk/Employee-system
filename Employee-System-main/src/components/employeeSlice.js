@@ -11,9 +11,9 @@ const employeeSlice = createSlice ({
     reducers: {},
     extraReducers : (builder) => {
         builder
-        .addCase(fetchEmployees.fulfilled, (state, action) => {
-            return action.payload;
-          })
+        // .addCase(fetchEmployees.fulfilled, (state, action) => {
+        //     // return action.payload;
+        //   })
           .addCase(addEmployees.fulfilled, (state, action) => {
             console.log(action)
             state.push(action.payload);
@@ -21,15 +21,15 @@ const employeeSlice = createSlice ({
           // .addCase(deleteEmployees.fulfilled, (state, action) => {
           //   return state.employees.filter((employee) => employee.id !== action.payload);
           // })
-          .addCase(updateEmployees.fulfilled, (state, action) => {
-            const updatedemployees = action.payload;
-            const index = state.findIndex((employees) => employees.id === updatedemployees.id);
-            if (index !== -1) {
-              state[index] = updatedemployees;
+          // .addCase(updateEmployees.fulfilled, (state, action) => {
+          //   const updatedemployees = action.payload;
+          //   const index = state.findIndex((employees) => employees.id === updatedemployees.id);
+          //   if (index !== -1) {
+          //     state[index] = updatedemployees;
               
-            }
+          //   }
             
-          });
+          // });
     }
 })
 

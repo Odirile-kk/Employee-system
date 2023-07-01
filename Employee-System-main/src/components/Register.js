@@ -1,7 +1,6 @@
 import {useState} from 'react'
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios'
-
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from './userSlice';
 import {Link} from 'react-router-dom';
@@ -17,13 +16,16 @@ const Register = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+  
     try {
       const response = await axios.post('http://localhost:3002/api/register', {
         userName,
         email,
         password,
       });
+  
       const data = response.data;
+  
       if (data.status === 'Ok') {
         alert('Registration successful')
         nav('/login');

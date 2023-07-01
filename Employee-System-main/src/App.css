@@ -76,3 +76,7 @@ a:hover {
   justify-content: right;
   margin-right: 20%;
 }
+.btnLogout {
+  background-color: red;
+  
+}
