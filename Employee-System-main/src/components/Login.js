@@ -21,10 +21,10 @@ const Login = () => {
         password,
       });
   
-      const data = response.data;
+      const token = response.data;
   
-      if (data.user) {
-        localStorage.setItem('token', data.user);
+      if (token) {
+        localStorage.setItem('isLogged', token);
         alert('Login successful');
         window.location.href = '/home';
       } else {

@@ -16,5 +16,5 @@ export const deleteEmployees = async (id) => {
 }
 
 export const updateEmployees = async (id, EmpList) => {
-    return await axios.patch(`${usersUrl}/${id}`, EmpList)
+    return await axios.put(`${usersUrl}/${id}`, EmpList)
 }

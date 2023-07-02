@@ -6,7 +6,7 @@ import { deleteEmployees, fetchEmployees } from './api';
 
 const Home = () => {
   const [data, setData] = useState([]);
-
+  const nav = useNavigate();
   useEffect(() => {
     fetchAll()
   }, [])
@@ -21,12 +21,18 @@ const Home = () => {
     fetchAll()
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    nav('/')
+  }
+  
   return (
   
     <div className='parent' >
       <div className='container mt-5'>
         <div className="addBtn">
           <Link to="/create" className="btn btn-success"><i class="bi bi-person-plus"></i></Link>
+          <button onClick={handleLogout} className="btn btn-danger"><i class="bi bi-x-square"></i></button>
         </div >
           <table className="table table-responsive table-borderless table-dark" >
           <thead className="table table-dark text-white">

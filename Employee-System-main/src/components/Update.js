@@ -9,106 +9,129 @@ import { addEmployees, fetchEmployees, updateEmployees } from './api';
 
 
 const Update = () => {
-    
-    const inputData = {
-        name: '',
-        surname: '',
-        email: '',
-        bio: ' ',
-        role: '',
-        phone: '',
+
+  const inputData = {
+    name: '',
+    surname: '',
+    email: '',
+    bio: ' ',
+    role: '',
+    phone: '',
+  }
+
+  const [employee, setEmployee] = useState(inputData);
+  const { name, surname, email, bio, role, phone } = employee
+
+  const { id } = useParams()
+  const nav = useNavigate();
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const image = reader.result;
+        setEmployee((inputVal) => ({
+          ...inputVal,
+          image: image,
+        }));
+      };
+  
+      reader.readAsDataURL(file);
     }
+  };
 
-    const [employee, setEmployee] = useState(inputData);
-    const {name, surname, email, bio, role, phone} = employee
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await updateEmployees(id, employee)
+    console.log(res)
+    nav('/')
+  }
 
-    const { id } = useParams()
-    const nav = useNavigate();
+  const loadAll = async () => {
+    const response = await fetchEmployees(id);
+    setEmployee(response.data);
+  }
 
-    // const handleSubmit = async(e) => {
-    //   e.preventDefault();
-    //   const res = await addEmployees(id, employee)
-    //   console.log(res)
-    //   nav('/')
-    // }
+  useEffect(() => {
+    loadAll()
+  }, []);
 
-    const loadAll = async() => {
-      const response = await fetchEmployees(id);
-      setEmployee(response.data);
-    }
+  // const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //      axios.patch(`http://localhost:3001/api/employees/`+ employee._id, employee)
+  //      console.log(employee._id)
+  //     .then(res => {
+  //         alert('succes')
+  //         nav('/')
+  //     })
+  // }
 
-    useEffect(() => {
-      loadAll()
-    }, []);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-         axios.patch(`http://localhost:3001/api/employees/`+ employee._id, employee)
-         console.log(inputData.id)
-        .then(res => {
-            alert('succes')
-            nav('/')
-        })
-    }
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:3001/api/employees/` + inputData._id)
-    //     .then(res=> setEmployee(res.data))
-    //     .catch(err => console.log(err))
-    // }, [])
+  // useEffect(() => {
+  //     axios.get(`http://localhost:3001/api/employees/` + inputData._id)
+  //     .then(res=> setEmployee(res.data))
+  //     .catch(err => console.log(err))
+  // }, [])
 
 
   return (
     <div>
-    <div className="offset-lg-3 col-lg-6">
-      <form className="container" onSubmit={handleSubmit}>
+      <div className="offset-lg-3 col-lg-6">
+        <form className="container" onSubmit={handleSubmit}>
 
-      <div className="form-group">
-          <label htmlFor='id'>ID</label>
-          <input type='number' disabled name='id' className='form-control' value={employee.id}
-          />
+          <div className="form-group">
+            <label htmlFor='id'>ID</label>
+            <input type='number' disabled name='id' className='form-control' value={employee.id}
+            />
           </div>
 
           <div className="form-group">
-          <label htmlFor='name'>Name</label>
-          <input type='text' name='name' className='form-control' value={employee.name}
-          onChange={e=> setEmployee({...inputData, name: e.target.value})}/>
+            <label htmlFor='name'>Name</label>
+            <input type='text' name='name' className='form-control' value={employee.name}
+              onChange={e => setEmployee({ ...inputData, name: e.target.value })} />
           </div>
 
           <div className="form-group">
-          <label htmlFor='surname'>Surname</label>
-          <input type='text' name='name' className='form-control' value={employee.surname}
-          onChange={e=> setEmployee({...inputData, surname: e.target.value})}/>
+            <label htmlFor='surname'>Surname</label>
+            <input type='text' name='name' className='form-control' value={employee.surname}
+              onChange={e => setEmployee({ ...inputData, surname: e.target.value })} />
           </div>
 
           <div className="form-group">
-          <label htmlFor='email'>Email</label>
-          <input type='email' name='name' className='form-control' value={employee.email}
-          onChange={e=> setEmployee({...inputData, email: e.target.value})}/>
+            <label htmlFor='email'>Email</label>
+            <input type='email' name='name' className='form-control' value={employee.email}
+              onChange={e => setEmployee({ ...inputData, email: e.target.value })} />
           </div>
 
           <div className="form-group">
-          <label htmlFor='bio'>Bio</label>
-          <input type='text' name='name' className='form-control' value={employee.bio}
-          onChange={e=> setEmployee({...inputData, bio: e.target.value})}/>
+            <label htmlFor='bio'>Bio</label>
+            <input type='text' name='name' className='form-control' value={employee.bio}
+              onChange={e => setEmployee({ ...inputData, bio: e.target.value })} />
           </div>
 
           <div className="form-group">
-          <label htmlFor='role'>Role</label>
-          <input type='text' name='name' className='form-control' value={employee.role}
-          onChange={e=> setEmployee({...inputData, role: e.target.value})}/>
+            <label htmlFor='role'>Role</label>
+            <input type='text' name='name' className='form-control' value={employee.role}
+              onChange={e => setEmployee({ ...inputData, role: e.target.value })} />
           </div>
 
           <div className="form-group">
-          <label htmlFor='role'>Phone</label>
-          <input type='text' name='name' className='form-control' value={employee.phone}
-          onChange={e=> setEmployee({...inputData, phone: e.target.value})}/>
+            <label htmlFor='role'>Phone</label>
+            <input type='text' name='name' className='form-control' value={employee.phone}
+              onChange={e => setEmployee({ ...inputData, phone: e.target.value })} />
           </div>
+          <div>
+            <label class="form-label" >Select Image</label>
+            <input type="file" accept="image/*" id="image" onChange={handleImageUpload}
+            />
+          </div>
+
 
           <button class="btn btn-success">Update</button>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
   )
 }
 

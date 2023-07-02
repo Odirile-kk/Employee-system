@@ -51,7 +51,7 @@ catch(err) {
 });
 
 //edit user
-app.patch('/api/employees/:id', async (req, res) => {
+app.put('/api/employees/:id', async (req, res) => {
   const employee = req.body;
   const editEmployee = new EmpList(employee);
 
@@ -61,7 +61,7 @@ app.patch('/api/employees/:id', async (req, res) => {
     } catch (error){
         res.status(409).json({ message: error.message});     
     }
-
+console.log({_id: request.params.id})
   // const employeeId = req.params.id;
   // const updatedEmployee = req.body;
   

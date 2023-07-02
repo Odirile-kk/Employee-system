@@ -1,7 +1,47 @@
 * {
-  /* background-image: url('assets/milad-fakurian-c10tq-bB52Y-unsplash.jpg') */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
 }
 
+.flex {
+  display: flex ;
+  align-items: center;
+}
+
+.container1{
+  width: 100%;
+  height: 60px;
+  background: #000;
+  
+}
+
+
+.container2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.log-button {
+  text-decoration: none;
+  padding: 10px;
+  font-size: 35px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.login {
+  color: #000;
+  background: green;
+}
+
+.register {
+  color: #000;
+  background: lightseagreen;
+}
 body {
   background-image: url('assets/milad-fakurian-c10tq-bB52Y-unsplash.jpg');
   background-size: cover;
@@ -75,8 +115,4 @@ a:hover {
   display: flex;
   justify-content: right;
   margin-right: 20%;
-}
-.btnLogout {
-  background-color: red;
-  
 }

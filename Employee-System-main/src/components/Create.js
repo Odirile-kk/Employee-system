@@ -45,7 +45,7 @@ const Create = () => {
             .then(res => {
                 console.log(res)
                 alert('success')
-                nav('/')
+                nav('/home')
             })
     }
 
