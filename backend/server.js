@@ -51,27 +51,17 @@ catch(err) {
 });
 
 //edit user
-app.put('/api/employees/:id', async (req, res) => {
-  const employee = req.body;
-  const editEmployee = new EmpList(employee);
-
-    try{
-        await EmpList.updateOne({_id: request.params.id}, editEmployee);
-        res.status(201).json(editEmployee);
-    } catch (error){
-        res.status(409).json({ message: error.message});     
-    }
-console.log({_id: request.params.id})
-  // const employeeId = req.params.id;
-  // const updatedEmployee = req.body;
+app.patch('/api/employees/:id', async (req, res) => {
+  const employeeId = req.params.id;
+  const updatedEmployee = req.body;
   
-  // EmpList.updateOne(employeeId, updatedEmployee, { new: true })
-  //   .then((employee) => {
-  //     res.json(employee);
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).send(err);
-  //   });
+  EmpList.findByIdAndUpdate(employeeId, updatedEmployee, { new: true })
+    .then((employee) => {
+      res.json(employee);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.delete('/api/employees/:id', async (req, res) => {
