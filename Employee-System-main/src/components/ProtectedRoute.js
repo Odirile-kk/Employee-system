@@ -5,7 +5,7 @@ import { Outlet, Link } from 'react-router-dom'
     let isAuth = localStorage.getItem('isLogged')
 
   return (
-    isAuth == true ? <Link to='/' />
+    isAuth === true ? <Link to='/' />
     :
     <Outlet/>
   )

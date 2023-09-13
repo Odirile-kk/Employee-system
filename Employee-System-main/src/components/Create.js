@@ -48,7 +48,9 @@ const Create = () => {
     }
 
     return (
-        <div >
+        <div style={{
+            marginTop: '10%'
+        }}>
             <div className="offset-lg-3 col-lg-6">
                 <form className="container" onSubmit={handleSubmit}>
 
