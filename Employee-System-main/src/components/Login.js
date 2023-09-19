@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "./userSlice";
-import { setEmail, setPassword, setValidate } from "./userSlice";
 import Navbar from "./Navbar";
 
 const Login = () => {
@@ -16,7 +13,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3002/api/login", {
+      const response = await axios.post("http://localhost:3001/api/login", {
         email,
         password,
       });

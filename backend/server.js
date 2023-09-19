@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose')
 const EmpList = require('./models/empModel')
+const Emp = require('./models/user.model.js')
+const jwt = require('jsonwebtoken')
 
 
 const app = express();
@@ -78,6 +80,44 @@ app.delete('/api/employees/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+//register user
+app.post('/api/register', async (req, res) => {
+	console.log(req.body)
+    try {
+        await Emp.create({
+            userName: req.body.userName,
+            email: req.body.email,
+            pasword: req.body.password,
+        })
+        res.json({ status: "Ok"})
+    }
+    catch (err) {
+        res.json({status: "Duplicate email"})
+    }
+
+})
+
+//login user
+app.post('/api/login', async (req, res) => { 
+	
+       const user = await Emp.findOne({
+            email: req.body.email,
+            pasword: req.body.password,
+        })
+		if (user) {
+			const token = jwt.sign({
+				email: user.email
+			},
+			'secret97'
+			)
+			return res.json({status: 'ok', user: token})
+		}
+		else {
+			return res.json({ status: 'error', user: false})
+		}
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

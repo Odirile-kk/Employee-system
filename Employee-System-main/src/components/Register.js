@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "./userSlice";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import { setEmail, setPassword, setValidate } from "./userSlice";
+
 
 const Register = () => {
   const nav = useNavigate();
