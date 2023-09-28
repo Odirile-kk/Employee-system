@@ -36,9 +36,9 @@ const Register = () => {
 
   return (
     <div>
-<div>
+{/* <div>
   <Navbar/>
-</div>
+</div> */}
 
       <div className="user-container">
         <form className="form">

@@ -35,9 +35,9 @@ const Login = () => {
 
   return (
     <div>
-    <div>
+    {/* <div>
       <Navbar/>
-    </div>
+    </div> */}
       <div className="user-container">
         <form className="form">
           <h2>Login</h2>
@@ -57,7 +57,7 @@ const Login = () => {
             Login
           </button>
           <p>
-            Don't have an account? <Link to={"/"}>Register</Link>
+            Don't have an account? <Link to={"/register"}>Register</Link>
           </p>
         </form>
       </div>

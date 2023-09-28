@@ -195,7 +195,7 @@ nav.is-hidden {
 
 .login {
   color: #000;
-  background: green;
+  background: #615f5fdd;
 }
 
 .register {
@@ -241,7 +241,7 @@ input {
 }
 
 button {
-  background-color: #4CAF50;
+  background-color: #615f5fdd;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -249,10 +249,11 @@ button {
   font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 5%;
 }
 
 button:hover {
-  background-color: #3e8e41;
+  background-color: #615f5fdd;
 }
 
 p {
@@ -260,7 +261,7 @@ p {
 }
 
 a {
-  color: #4CAF50;
+  color: #615f5fdd;
   text-decoration: none;
 }
 
@@ -269,7 +270,8 @@ a:hover {
 }
 
 .btn{
-  margin: 2px;;
+  margin: 2px;
+  
 }
 .addBtn{
   display: flex;

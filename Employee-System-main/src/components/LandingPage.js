@@ -5,9 +5,9 @@ import Navbar from './Navbar'
 const LandingPage = () => {
   return (
     <div>
-    <div>
+    {/* <div>
 <Navbar/>
-    </div>
+    </div> */}
      
 
         <div className="container2">
